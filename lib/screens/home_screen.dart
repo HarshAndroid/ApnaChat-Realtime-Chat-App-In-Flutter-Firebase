@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//home screen -- where all available contacts are shown
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
