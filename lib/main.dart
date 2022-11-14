@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'screens/auth/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 //global object for accessing device screen size
 late Size mq;
 
 void main() {
+  _initializeFirebase();
   runApp(const MyApp());
 }
 
@@ -27,4 +30,8 @@ class MyApp extends StatelessWidget {
         )),
         home: const LoginScreen());
   }
+}
+
+_initializeFirebase() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "288842837392",
+    "project_id": "we-chat-75f13",
+    "storage_bucket": "we-chat-75f13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288842837392:android:1353619813061d867a5715",
+        "android_client_info": {
+          "package_name": "com.harshRajpurohit.we_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288842837392-tib1k52rlca0mlq4jr3iil7apgvcc5jt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeszZHLYJNyjUhpujMH9yZ4ol9JqsAmPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288842837392-tib1k52rlca0mlq4jr3iil7apgvcc5jt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
