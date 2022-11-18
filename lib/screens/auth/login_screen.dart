@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //initializing media query (for getting device screen size)
-    mq = MediaQuery.of(context).size;
+    // mq = MediaQuery.of(context).size;
 
     return Scaffold(
       //app bar
@@ -58,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: const StadiumBorder(),
                     elevation: 1),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (_) => const HomeScreen()));
                 },
 
                 //google icon
