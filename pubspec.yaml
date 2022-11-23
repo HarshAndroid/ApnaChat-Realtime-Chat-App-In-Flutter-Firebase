@@ -13,15 +13,20 @@ dependencies:
     sdk: flutter
 
 
-  # for using cupertino icons
+  # For using cupertino icons
   cupertino_icons: ^1.0.2
   
-  # for integrating firebase
+  # For integrating firebase
   firebase_core: ^2.2.0
-  # for handling firebase authentication
+
+  # For handling firebase authentication
   firebase_auth: ^4.1.3
-  # for handling google sign in
+
+  # For handling google sign in
   google_sign_in: ^5.4.2
+
+  # For accessing cloud firestore database
+  cloud_firestore: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -37,12 +42,12 @@ dev_dependencies:
 #   remove_alpha_ios: true
   
 
-  # for recommended coding practices
+  # For recommended coding practices
   flutter_lints: ^2.0.0
 
 flutter:
 
-  # for enabling material design
+  # For enabling material design
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
