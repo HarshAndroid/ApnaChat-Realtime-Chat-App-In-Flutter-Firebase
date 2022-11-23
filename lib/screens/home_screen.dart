@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../api/apis.dart';
+import '../main.dart';
+import '../widgets/chat_user_card.dart';
 
 //home screen -- where all available contacts are shown
 class HomeScreen extends StatefulWidget {
@@ -39,6 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: const Icon(Icons.add_comment_rounded)),
       ),
+
+      //body
+      body: ListView.builder(
+          itemCount: 16,
+          padding: EdgeInsets.only(top: mq.height * .01),
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return const ChatUserCard();
+          }),
     );
   }
 }
