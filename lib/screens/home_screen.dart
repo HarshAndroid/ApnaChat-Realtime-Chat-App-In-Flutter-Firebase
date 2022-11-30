@@ -6,6 +6,7 @@ import '../api/apis.dart';
 import '../main.dart';
 import '../models/chat_user.dart';
 import '../widgets/chat_user_card.dart';
+import 'profile_screen.dart';
 
 //home screen -- where all available contacts are shown
 class HomeScreen extends StatefulWidget {
@@ -30,7 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
 
           //more features button
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => ProfileScreen(user: list[0])));
+              },
+              icon: const Icon(Icons.more_vert))
         ],
       ),
 

@@ -29,7 +29,7 @@ class _ChatUserCardState extends State<ChatUserCard> {
           //user profile picture
           // leading: const CircleAvatar(child: Icon(CupertinoIcons.person)),
           leading: ClipRRect(
-            borderRadius: BorderRadius.circular(mq.height * .3),
+            borderRadius: BorderRadius.circular(mq.height * .03),
             child: CachedNetworkImage(
               width: mq.height * .055,
               height: mq.height * .055,
