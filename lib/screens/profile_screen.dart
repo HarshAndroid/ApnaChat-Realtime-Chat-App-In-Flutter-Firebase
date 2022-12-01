@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../api/apis.dart';
+import '../helper/dialogs.dart';
 import '../main.dart';
 import '../models/chat_user.dart';
+import 'auth/login_screen.dart';
 
 //profile screen -- to show signed in user info
 class ProfileScreen extends StatefulWidget {
@@ -30,8 +32,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: FloatingActionButton.extended(
               backgroundColor: Colors.redAccent,
               onPressed: () async {
-                await APIs.auth.signOut();
-                await GoogleSignIn().signOut();
+                //for showing progress dialog
+                Dialogs.showProgressBar(context);
+
+                //sign out from app
+                await APIs.auth.signOut().then((value) async {
+                  await GoogleSignIn().signOut().then((value) {
+                    //for hiding progress dialog
+                    Navigator.pop(context);
+
+                    //for moving to home screen
+                    Navigator.pop(context);
+
+                    //replacing home screen with login screen
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => const LoginScreen()));
+                  });
+                });
               },
               icon: const Icon(Icons.logout),
               label: const Text('Logout')),
@@ -46,16 +63,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(width: mq.width, height: mq.height * .03),
 
               //user profile picture
-              ClipRRect(
-                borderRadius: BorderRadius.circular(mq.height * .1),
-                child: CachedNetworkImage(
-                  width: mq.height * .2,
-                  height: mq.height * .2,
-                  fit: BoxFit.fill,
-                  imageUrl: widget.user.image,
-                  errorWidget: (context, url, error) =>
-                      const CircleAvatar(child: Icon(CupertinoIcons.person)),
-                ),
+              Stack(
+                children: [
+                  //profile picture
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(mq.height * .1),
+                    child: CachedNetworkImage(
+                      width: mq.height * .2,
+                      height: mq.height * .2,
+                      fit: BoxFit.fill,
+                      imageUrl: widget.user.image,
+                      errorWidget: (context, url, error) => const CircleAvatar(
+                          child: Icon(CupertinoIcons.person)),
+                    ),
+                  ),
+
+                  //edit image button
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: MaterialButton(
+                      elevation: 1,
+                      onPressed: () {},
+                      shape: const CircleBorder(),
+                      color: Colors.white,
+                      child: const Icon(Icons.edit, color: Colors.blue),
+                    ),
+                  )
+                ],
               ),
 
               // for adding some space
