@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +95,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           right: 0,
                           child: MaterialButton(
                             elevation: 1,
-                            onPressed: () {},
+                            onPressed: () {
+                              _showBottomSheet();
+                            },
                             shape: const CircleBorder(),
                             color: Colors.white,
                             child: const Icon(Icons.edit, color: Colors.blue),
@@ -179,5 +179,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           )),
     );
+  }
+
+  // bottom sheet for picking a profile picture for user
+  void _showBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (_) {
+          return ListView(
+            shrinkWrap: true,
+            padding:
+                EdgeInsets.only(top: mq.height * .03, bottom: mq.height * .05),
+            children: [
+              //pick profile picture label
+              const Text('Pick Profile Picture',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+
+              //for adding some space
+              SizedBox(height: mq.height * .02),
+
+              //buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  //pick from gallery button
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: const CircleBorder(),
+                          fixedSize: Size(mq.width * .3, mq.height * .15)),
+                      onPressed: () {},
+                      child: Image.asset('images/add_image.png')),
+
+                  //take picture from camera button
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: const CircleBorder(),
+                          fixedSize: Size(mq.width * .3, mq.height * .15)),
+                      onPressed: () {},
+                      child: Image.asset('images/camera.png')),
+                ],
+              )
+            ],
+          );
+        });
   }
 }
