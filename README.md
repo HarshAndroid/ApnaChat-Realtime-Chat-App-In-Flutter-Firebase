@@ -5,7 +5,7 @@
 
 <b>Simple, Decent & Feature Rich Chatting Application.</b></br>
 
-<b>Currently it is in Development Phase (Check Youtube Course) 👇<b>
+<b>Currently it is in **DEVELOPMENT Phase, So All Features Are Not Implemented yet (Check Youtube Course) 👇<b>
   
 
 <b>Some ScreenShots(Actual App Even Looks Better 😃):</b></br><br>
