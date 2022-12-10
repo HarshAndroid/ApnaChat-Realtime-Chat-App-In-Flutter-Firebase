@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../models/chat_user.dart';
+import '../screens/chat_screen.dart';
 
 //card to represent a single user in home screen
 class ChatUserCard extends StatefulWidget {
@@ -24,7 +25,11 @@ class _ChatUserCardState extends State<ChatUserCard> {
       elevation: 0.5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          //for navigating to chat screen
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => ChatScreen(user: widget.user)));
+        },
         child: ListTile(
           //user profile picture
           // leading: const CircleAvatar(child: Icon(CupertinoIcons.person)),
