@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../api/apis.dart';
 import '../main.dart';
 import '../models/chat_user.dart';
 
@@ -27,7 +31,50 @@ class _ChatScreenState extends State<ChatScreen> {
 
         //body
         body: Column(
-          children: [_chatInput()],
+          children: [
+            Expanded(
+              child: StreamBuilder(
+                stream: APIs.getAllMessages(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    //if data is loading
+                    case ConnectionState.waiting:
+                    case ConnectionState.none:
+                      return const Center(child: CircularProgressIndicator());
+
+                    //if some or all data is loaded then show it
+                    case ConnectionState.active:
+                    case ConnectionState.done:
+                      final data = snapshot.data?.docs;
+                      log('Data: ${jsonEncode(data![0].data())}');
+                      // _list =
+                      //     data?.map((e) => ChatUser.fromJson(e.data())).toList() ??
+                      //         [];
+
+                      final _list = ['hii', 'hello'];
+
+                      if (_list.isNotEmpty) {
+                        return ListView.builder(
+                            itemCount: _list.length,
+                            padding: EdgeInsets.only(top: mq.height * .01),
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Text('Message: ${_list[index]}');
+                            });
+                      } else {
+                        return const Center(
+                          child: Text('Say Hii! 👋',
+                              style: TextStyle(fontSize: 20)),
+                        );
+                      }
+                  }
+                },
+              ),
+            ),
+
+            //chat input filed
+            _chatInput()
+          ],
         ),
       ),
     );
