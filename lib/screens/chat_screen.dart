@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import '../api/apis.dart';
 import '../main.dart';
 import '../models/chat_user.dart';
+import '../models/message.dart';
+import '../widgets/message_card.dart';
 
 class ChatScreen extends StatefulWidget {
   final ChatUser user;
@@ -19,6 +21,9 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  //for storing all messages
+  List<Message> _list = [];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,6 +33,8 @@ class _ChatScreenState extends State<ChatScreen> {
           automaticallyImplyLeading: false,
           flexibleSpace: _appBar(),
         ),
+
+        backgroundColor: const Color.fromARGB(255, 234, 248, 255),
 
         //body
         body: Column(
@@ -50,8 +57,21 @@ class _ChatScreenState extends State<ChatScreen> {
                       // _list =
                       //     data?.map((e) => ChatUser.fromJson(e.data())).toList() ??
                       //         [];
-
-                      final _list = ['hii', 'hello'];
+                      _list.clear();
+                      _list.add(Message(
+                          toId: 'xyz',
+                          msg: 'Hii',
+                          read: '',
+                          type: Type.text,
+                          fromId: APIs.user.uid,
+                          sent: '12:00 AM'));
+                      _list.add(Message(
+                          toId: APIs.user.uid,
+                          msg: 'Hello',
+                          read: '',
+                          type: Type.text,
+                          fromId: 'xyz',
+                          sent: '12:05 AM'));
 
                       if (_list.isNotEmpty) {
                         return ListView.builder(
@@ -59,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             padding: EdgeInsets.only(top: mq.height * .01),
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return Text('Message: ${_list[index]}');
+                              return MessageCard(message: _list[index]);
                             });
                       } else {
                         return const Center(
