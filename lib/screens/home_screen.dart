@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../api/apis.dart';
@@ -29,6 +32,21 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     APIs.getSelfInfo();
+
+    //for setting user status to active
+    APIs.updateActiveStatus(true);
+
+    //for updating user active status according to lifecycle events
+    //resume -- active or online
+    //pause  -- inactive or offline
+    SystemChannels.lifecycle.setMessageHandler((message) {
+      log('Message: $message');
+
+      if (message.toString().contains('resume')) APIs.updateActiveStatus(true);
+      if (message.toString().contains('pause')) APIs.updateActiveStatus(false);
+
+      return Future.value(message);
+    });
   }
 
   @override

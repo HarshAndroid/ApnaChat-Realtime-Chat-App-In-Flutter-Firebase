@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           //app bar
           appBar: AppBar(title: const Text('Profile Screen')),
 
-          //floating button to add new user
+          //floating button to log out
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: FloatingActionButton.extended(
