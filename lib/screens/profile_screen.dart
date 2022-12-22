@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -47,6 +48,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //for showing progress dialog
                   Dialogs.showProgressBar(context);
 
+                  await APIs.updateActiveStatus(false);
+
                   //sign out from app
                   await APIs.auth.signOut().then((value) async {
                     await GoogleSignIn().signOut().then((value) {
@@ -55,6 +58,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                       //for moving to home screen
                       Navigator.pop(context);
+
+                      APIs.auth = FirebaseAuth.instance;
 
                       //replacing home screen with login screen
                       Navigator.pushReplacement(
@@ -238,8 +243,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         final ImagePicker picker = ImagePicker();
 
                         // Pick an image
-                        final XFile? image =
-                            await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+                        final XFile? image = await picker.pickImage(
+                            source: ImageSource.gallery, imageQuality: 80);
                         if (image != null) {
                           log('Image Path: ${image.path}');
                           setState(() {
@@ -263,8 +268,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         final ImagePicker picker = ImagePicker();
 
                         // Pick an image
-                        final XFile? image =
-                            await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
+                        final XFile? image = await picker.pickImage(
+                            source: ImageSource.camera, imageQuality: 80);
                         if (image != null) {
                           log('Image Path: ${image.path}');
                           setState(() {
