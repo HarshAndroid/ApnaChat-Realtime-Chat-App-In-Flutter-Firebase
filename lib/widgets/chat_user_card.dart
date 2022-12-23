@@ -8,6 +8,7 @@ import '../main.dart';
 import '../models/chat_user.dart';
 import '../models/message.dart';
 import '../screens/chat_screen.dart';
+import 'dialogs/profile_dialog.dart';
 
 //card to represent a single user in home screen
 class ChatUserCard extends StatefulWidget {
@@ -48,14 +49,21 @@ class _ChatUserCardState extends State<ChatUserCard> {
 
               return ListTile(
                 //user profile picture
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(mq.height * .03),
-                  child: CachedNetworkImage(
-                    width: mq.height * .055,
-                    height: mq.height * .055,
-                    imageUrl: widget.user.image,
-                    errorWidget: (context, url, error) =>
-                        const CircleAvatar(child: Icon(CupertinoIcons.person)),
+                leading: InkWell(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) => ProfileDialog(user: widget.user));
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(mq.height * .03),
+                    child: CachedNetworkImage(
+                      width: mq.height * .055,
+                      height: mq.height * .055,
+                      imageUrl: widget.user.image,
+                      errorWidget: (context, url, error) => const CircleAvatar(
+                          child: Icon(CupertinoIcons.person)),
+                    ),
                   ),
                 ),
 
