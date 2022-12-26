@@ -43,6 +43,9 @@ dependencies:
   # For accessing firebase messaging (Push Notification)
   firebase_messaging: ^14.2.0
 
+  # For calling RestAPIs
+  http: ^0.13.5
+
 
 dev_dependencies:
   flutter_test:

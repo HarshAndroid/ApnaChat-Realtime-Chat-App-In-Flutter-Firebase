@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -5,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:http/http.dart';
 
 import '../models/chat_user.dart';
 import '../models/message.dart';
@@ -38,6 +40,29 @@ class APIs {
         log('Push Token: $t');
       }
     });
+  }
+
+  // for sending push notification
+  static Future<void> sendPushNotification(
+      ChatUser chatUser, String msg) async {
+    try {
+      final body = {
+        "to": chatUser.pushToken,
+        "notification": {"title": chatUser.name, "body": msg}
+      };
+
+      var res = await post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json',
+            HttpHeaders.authorizationHeader:
+                'key=AAAAQ0Bf7ZA:APA91bGd5IN5v43yedFDo86WiSuyTERjmlr4tyekbw_YW6JrdLFblZcbHdgjDmogWLJ7VD65KGgVbETS0Px7LnKk8NdAz4Z-AsHRp9WoVfArA5cNpfMKcjh_MQI-z96XQk5oIDUwx8D1'
+          },
+          body: jsonEncode(body));
+      log('Response status: ${res.statusCode}');
+      log('Response body: ${res.body}');
+    } catch (e) {
+      log('\nsendPushNotificationE: $e');
+    }
   }
 
   // for checking if user exists or not?
@@ -175,7 +200,8 @@ class APIs {
 
     final ref = firestore
         .collection('chats/${getConversationID(chatUser.id)}/messages/');
-    await ref.doc(time).set(message.toJson());
+    await ref.doc(time).set(message.toJson()).then((value) =>
+        sendPushNotification(chatUser, type == Type.text ? msg : 'image'));
   }
 
   //update read status of message
