@@ -19,9 +19,12 @@ class MessageCard extends StatefulWidget {
 class _MessageCardState extends State<MessageCard> {
   @override
   Widget build(BuildContext context) {
-    return APIs.user.uid == widget.message.fromId
-        ? _greenMessage()
-        : _blueMessage();
+    bool isMe = APIs.user.uid == widget.message.fromId;
+    return InkWell(
+        onLongPress: () {
+          _showBottomSheet(isMe);
+        },
+        child: isMe ? _greenMessage() : _blueMessage());
   }
 
   // sender or another user message
@@ -155,5 +158,118 @@ class _MessageCardState extends State<MessageCard> {
         ),
       ],
     );
+  }
+
+  // bottom sheet for modifying message details
+  void _showBottomSheet(bool isMe) {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        builder: (_) {
+          return ListView(
+            shrinkWrap: true,
+            children: [
+              //black divider
+              Container(
+                height: 4,
+                margin: EdgeInsets.symmetric(
+                    vertical: mq.height * .015, horizontal: mq.width * .4),
+                decoration: BoxDecoration(
+                    color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+              ),
+
+              widget.message.type == Type.text
+                  ?
+                  //copy option
+                  _OptionItem(
+                      icon: const Icon(Icons.copy_all_rounded,
+                          color: Colors.blue, size: 26),
+                      name: 'Copy Text',
+                      onTap: () {})
+                  :
+                  //save option
+                  _OptionItem(
+                      icon: const Icon(Icons.download_rounded,
+                          color: Colors.blue, size: 26),
+                      name: 'Save Image',
+                      onTap: () {}),
+
+              //separator or divider
+              if (isMe)
+                Divider(
+                  color: Colors.black54,
+                  endIndent: mq.width * .04,
+                  indent: mq.width * .04,
+                ),
+
+              //edit option
+              if (widget.message.type == Type.text && isMe)
+                _OptionItem(
+                    icon: const Icon(Icons.edit, color: Colors.blue, size: 26),
+                    name: 'Edit Message',
+                    onTap: () {}),
+
+              //delete option
+              if (isMe)
+                _OptionItem(
+                    icon: const Icon(Icons.delete_forever,
+                        color: Colors.red, size: 26),
+                    name: 'Delete Message',
+                    onTap: () {}),
+
+              //separator or divider
+              Divider(
+                color: Colors.black54,
+                endIndent: mq.width * .04,
+                indent: mq.width * .04,
+              ),
+
+              //sent time
+              _OptionItem(
+                  icon: const Icon(Icons.remove_red_eye, color: Colors.blue),
+                  name: 'Sent At: ',
+                  onTap: () {}),
+
+              //read time
+              _OptionItem(
+                  icon: const Icon(Icons.remove_red_eye, color: Colors.green),
+                  name: 'Read At: ',
+                  onTap: () {}),
+            ],
+          );
+        });
+  }
+}
+
+//custom options card (for copy, edit, delete, etc.)
+class _OptionItem extends StatelessWidget {
+  final Icon icon;
+  final String name;
+  final VoidCallback onTap;
+
+  const _OptionItem(
+      {required this.icon, required this.name, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: () => onTap(),
+        child: Padding(
+          padding: EdgeInsets.only(
+              left: mq.width * .05,
+              top: mq.height * .015,
+              bottom: mq.height * .015),
+          child: Row(children: [
+            icon,
+            Flexible(
+                child: Text('    $name',
+                    style: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.black54,
+                        letterSpacing: 0.5)))
+          ]),
+        ));
   }
 }
