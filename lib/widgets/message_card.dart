@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../api/apis.dart';
+import '../helper/dialogs.dart';
 import '../helper/my_date_util.dart';
 import '../main.dart';
 import '../models/message.dart';
@@ -187,7 +189,16 @@ class _MessageCardState extends State<MessageCard> {
                       icon: const Icon(Icons.copy_all_rounded,
                           color: Colors.blue, size: 26),
                       name: 'Copy Text',
-                      onTap: () {})
+                      onTap: () async {
+                        await Clipboard.setData(
+                                ClipboardData(text: widget.message.msg))
+                            .then((value) {
+                          //for hiding bottom sheet
+                          Navigator.pop(context);
+
+                          Dialogs.showSnackbar(context, 'Text Copied!');
+                        });
+                      })
                   :
                   //save option
                   _OptionItem(
@@ -217,7 +228,12 @@ class _MessageCardState extends State<MessageCard> {
                     icon: const Icon(Icons.delete_forever,
                         color: Colors.red, size: 26),
                     name: 'Delete Message',
-                    onTap: () {}),
+                    onTap: () async {
+                      await APIs.deleteMessage(widget.message).then((value) {
+                        //for hiding bottom sheet
+                        Navigator.pop(context);
+                      });
+                    }),
 
               //separator or divider
               Divider(
@@ -229,13 +245,16 @@ class _MessageCardState extends State<MessageCard> {
               //sent time
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.blue),
-                  name: 'Sent At: ',
+                  name:
+                      'Sent At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.sent)}',
                   onTap: () {}),
 
               //read time
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.green),
-                  name: 'Read At: ',
+                  name: widget.message.read.isEmpty
+                      ? 'Read At: Not seen yet'
+                      : 'Read At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.read)}',
                   onTap: () {}),
             ],
           );
