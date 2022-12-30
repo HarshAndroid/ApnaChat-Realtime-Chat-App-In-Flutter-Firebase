@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 import '../api/apis.dart';
 import '../helper/dialogs.dart';
@@ -205,7 +208,23 @@ class _MessageCardState extends State<MessageCard> {
                       icon: const Icon(Icons.download_rounded,
                           color: Colors.blue, size: 26),
                       name: 'Save Image',
-                      onTap: () {}),
+                      onTap: () async {
+                        try {
+                          log('Image Url: ${widget.message.msg}');
+                          await GallerySaver.saveImage(widget.message.msg,
+                                  albumName: 'We Chat')
+                              .then((success) {
+                            //for hiding bottom sheet
+                            Navigator.pop(context);
+                            if (success != null && success) {
+                              Dialogs.showSnackbar(
+                                  context, 'Image Successfully Saved!');
+                            }
+                          });
+                        } catch (e) {
+                          log('ErrorWhileSavingImg: $e');
+                        }
+                      }),
 
               //separator or divider
               if (isMe)
