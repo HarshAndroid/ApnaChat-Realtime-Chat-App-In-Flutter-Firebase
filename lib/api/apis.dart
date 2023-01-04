@@ -169,7 +169,10 @@ class APIs {
 
     return firestore
         .collection('users')
-        .where('id', whereIn: userIds)
+        .where('id',
+            whereIn: userIds.isEmpty
+                ? ['']
+                : userIds) //because empty list throws an error
         // .where('id', isNotEqualTo: user.uid)
         .snapshots();
   }
