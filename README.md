@@ -5,8 +5,8 @@
 
 <b>Simple, Decent & Feature Rich Chatting Application.</b></br>
 
-<b>Currently it is in **DEVELOPMENT Phase, So All Features Are Not Implemented yet (Check Youtube Course) 👇<b>
-  
+<b>Check Youtube Course 👇<b>
+https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
 
 <b>Some ScreenShots(Actual App Even Looks Better 😃):</b></br><br>
 <kbd>
@@ -23,6 +23,7 @@
   
  <b>Features👇 : </b>
 <ul>
+<li>Show only known users or contacts
 <li>Real-Time Messaging (With Firebase)
 <li>Google Sign-In (No account or mobile number needed)
 <li>Adding Users using Email Id
