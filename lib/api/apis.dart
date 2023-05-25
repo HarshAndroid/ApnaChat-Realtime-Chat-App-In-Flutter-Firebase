@@ -22,7 +22,16 @@ class APIs {
   static FirebaseStorage storage = FirebaseStorage.instance;
 
   // for storing self information
-  static late ChatUser me;
+  static ChatUser me = ChatUser(
+      id: user.uid,
+      name: user.displayName.toString(),
+      email: user.email.toString(),
+      about: "Hey, I'm using We Chat!",
+      image: user.photoURL.toString(),
+      createdAt: '',
+      isOnline: false,
+      lastActive: '',
+      pushToken: '');
 
   // to return current user
   static User get user => auth.currentUser!;
