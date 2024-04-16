@@ -1,10 +1,7 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -34,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       // for hiding keyboard
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
           //app bar
           appBar: AppBar(title: const Text('Profile Screen')),
@@ -59,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       //for moving to home screen
                       Navigator.pop(context);
 
-                      APIs.auth = FirebaseAuth.instance;
+                      // APIs.auth = FirebaseAuth.instance;
 
                       //replacing home screen with login screen
                       Navigator.pushReplacement(
@@ -252,8 +249,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
 
                           APIs.updateProfilePicture(File(_image!));
+
                           // for hiding bottom sheet
-                          Navigator.pop(context);
+                          if (mounted) Navigator.pop(context);
                         }
                       },
                       child: Image.asset('images/add_image.png')),
@@ -277,8 +275,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
 
                           APIs.updateProfilePicture(File(_image!));
+
                           // for hiding bottom sheet
-                          Navigator.pop(context);
+                          if (mounted) Navigator.pop(context);
                         }
                       },
                       child: Image.asset('images/camera.png')),

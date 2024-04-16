@@ -10,10 +10,11 @@ import 'package:http/http.dart';
 
 import '../models/chat_user.dart';
 import '../models/message.dart';
+import 'notification_access_token.dart';
 
 class APIs {
   // for authentication
-  static FirebaseAuth auth = FirebaseAuth.instance;
+  static FirebaseAuth get auth => FirebaseAuth.instance;
 
   // for accessing cloud firestore database
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -61,29 +62,41 @@ class APIs {
     // });
   }
 
-  // for sending push notification
+  // for sending push notification (Updated Codes)
   static Future<void> sendPushNotification(
       ChatUser chatUser, String msg) async {
     try {
       final body = {
-        "to": chatUser.pushToken,
-        "notification": {
-          "title": me.name, //our name should be send
-          "body": msg,
-          "android_channel_id": "chats"
-        },
-        // "data": {
-        //   "some_data": "User ID: ${me.id}",
-        // },
+        "message": {
+          "token": chatUser.pushToken,
+          "notification": {
+            "title": me.name, //our name should be send
+            "body": msg,
+          },
+        }
       };
 
-      var res = await post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
-          headers: {
-            HttpHeaders.contentTypeHeader: 'application/json',
-            HttpHeaders.authorizationHeader:
-                'key=AAAAQ0Bf7ZA:APA91bGd5IN5v43yedFDo86WiSuyTERjmlr4tyekbw_YW6JrdLFblZcbHdgjDmogWLJ7VD65KGgVbETS0Px7LnKk8NdAz4Z-AsHRp9WoVfArA5cNpfMKcjh_MQI-z96XQk5oIDUwx8D1'
-          },
-          body: jsonEncode(body));
+      // Firebase Project > Project Settings > General Tab > Project ID
+      const projectID = 'we-chat-75f13';
+
+      // get firebase admin token
+      final bearerToken = await NotificationAccessToken.getToken;
+
+      log('bearerToken: $bearerToken');
+
+      // handle null token
+      if (bearerToken == null) return;
+
+      var res = await post(
+        Uri.parse(
+            'https://fcm.googleapis.com/v1/projects/$projectID/messages:send'),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader: 'Bearer $bearerToken'
+        },
+        body: jsonEncode(body),
+      );
+
       log('Response status: ${res.statusCode}');
       log('Response body: ${res.body}');
     } catch (e) {
