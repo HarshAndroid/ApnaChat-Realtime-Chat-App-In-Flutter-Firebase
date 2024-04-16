@@ -56,20 +56,31 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       //for hiding keyboard when a tap is detected on screen
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: WillPopScope(
+      onTap: FocusScope.of(context).unfocus,
+      child: PopScope(
+        // onWillPop: () {
+        //   if (_isSearching) {
+        //     setState(() {
+        //       _isSearching = !_isSearching;
+        //     });
+        //     return Future.value(false);
+        //   } else {
+        //     return Future.value(true);
+        //   }
+        // },
+
         //if search is on & back button is pressed then close search
         //or else simple close current screen on back button click
-        onWillPop: () {
+        canPop: !_isSearching,
+        onPopInvoked: (_) async {
           if (_isSearching) {
-            setState(() {
-              _isSearching = !_isSearching;
-            });
-            return Future.value(false);
+            setState(() => _isSearching = !_isSearching);
           } else {
-            return Future.value(true);
+            Navigator.of(context).pop();
           }
         },
+
+        //
         child: Scaffold(
           //app bar
           appBar: AppBar(
@@ -212,8 +223,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(20)),
 
               //title
-              title: Row(
-                children: const [
+              title: const Row(
+                children: [
                   Icon(
                     Icons.person_add,
                     color: Colors.blue,

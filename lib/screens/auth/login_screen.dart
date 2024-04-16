@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
         log('\nUser: ${user.user}');
         log('\nUserAdditionalInfo: ${user.additionalUserInfo}');
 
-        if ((await APIs.userExists())) {
+        if (await APIs.userExists() && mounted) {
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (_) => const HomeScreen()));
         } else {
@@ -77,7 +77,11 @@ class _LoginScreenState extends State<LoginScreen> {
       return await APIs.auth.signInWithCredential(credential);
     } catch (e) {
       log('\n_signInWithGoogle: $e');
-      Dialogs.showSnackbar(context, 'Something Went Wrong (Check Internet!)');
+
+      if (mounted) {
+        Dialogs.showSnackbar(context, 'Something Went Wrong (Check Internet!)');
+      }
+
       return null;
     }
   }
@@ -121,9 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: const Color.fromARGB(255, 223, 255, 187),
                     shape: const StadiumBorder(),
                     elevation: 1),
-                onPressed: () {
-                  _handleGoogleBtnClick();
-                },
+
+                // on tap
+                onPressed: _handleGoogleBtnClick,
 
                 //google icon
                 icon: Image.asset('images/google.png', height: mq.height * .03),

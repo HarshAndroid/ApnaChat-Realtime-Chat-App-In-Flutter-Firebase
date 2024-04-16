@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -67,4 +64,14 @@ class DefaultFirebaseOptions {
     iosClientId: '288842837392-sgib97u6439i4jte3bo19u00fh663euu.apps.googleusercontent.com',
     iosBundleId: 'com.harshRajpurohit.weChat',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBW-1MjB067GUwQHPnYmWkr_4iMz13UgRs',
+    appId: '1:288842837392:web:6ae5bafc6d7d4f407a5715',
+    messagingSenderId: '288842837392',
+    projectId: 'we-chat-75f13',
+    authDomain: 'we-chat-75f13.firebaseapp.com',
+    storageBucket: 'we-chat-75f13.appspot.com',
+  );
+
 }

@@ -21,12 +21,13 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       // for hiding keyboard
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
           //app bar
           appBar: AppBar(title: Text(widget.user.name)),
-          floatingActionButton: //user about
-              Row(
+
+          //user about
+          floatingActionButton: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
