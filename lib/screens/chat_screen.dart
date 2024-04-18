@@ -48,7 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
         //     return Future.value(true);
         //   }
         // },
-      
+
         //if emojis are shown & back button is pressed then hide emojis
         //or else simple close current screen on back button click
         canPop: !_showEmoji,
@@ -59,7 +59,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Navigator.of(context).pop();
           }
         },
-      
+
         //
         child: Scaffold(
           //app bar
@@ -67,73 +67,75 @@ class _ChatScreenState extends State<ChatScreen> {
             automaticallyImplyLeading: false,
             flexibleSpace: _appBar(),
           ),
-      
+
           backgroundColor: const Color.fromARGB(255, 234, 248, 255),
-      
+
           //body
-          body: Column(
-            children: [
-              Expanded(
-                child: StreamBuilder(
-                  stream: APIs.getAllMessages(widget.user),
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      //if data is loading
-                      case ConnectionState.waiting:
-                      case ConnectionState.none:
-                        return const SizedBox();
-      
-                      //if some or all data is loaded then show it
-                      case ConnectionState.active:
-                      case ConnectionState.done:
-                        final data = snapshot.data?.docs;
-                        _list = data
-                                ?.map((e) => Message.fromJson(e.data()))
-                                .toList() ??
-                            [];
-      
-                        if (_list.isNotEmpty) {
-                          return ListView.builder(
-                              reverse: true,
-                              itemCount: _list.length,
-                              padding: EdgeInsets.only(top: mq.height * .01),
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return MessageCard(message: _list[index]);
-                              });
-                        } else {
-                          return const Center(
-                            child: Text('Say Hii! 👋',
-                                style: TextStyle(fontSize: 20)),
-                          );
-                        }
-                    }
-                  },
-                ),
-              ),
-      
-              //progress indicator for showing uploading
-              if (_isUploading)
-                const Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-                        child: CircularProgressIndicator(strokeWidth: 2))),
-      
-              //chat input filed
-              _chatInput(),
-      
-              //show emojis on keyboard emoji button click & vice versa
-              if (_showEmoji)
-                SizedBox(
-                  height: mq.height * .35,
-                  child: EmojiPicker(
-                    textEditingController: _textController,
-                    config: const Config(),
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: StreamBuilder(
+                    stream: APIs.getAllMessages(widget.user),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        //if data is loading
+                        case ConnectionState.waiting:
+                        case ConnectionState.none:
+                          return const SizedBox();
+
+                        //if some or all data is loaded then show it
+                        case ConnectionState.active:
+                        case ConnectionState.done:
+                          final data = snapshot.data?.docs;
+                          _list = data
+                                  ?.map((e) => Message.fromJson(e.data()))
+                                  .toList() ??
+                              [];
+
+                          if (_list.isNotEmpty) {
+                            return ListView.builder(
+                                reverse: true,
+                                itemCount: _list.length,
+                                padding: EdgeInsets.only(top: mq.height * .01),
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return MessageCard(message: _list[index]);
+                                });
+                          } else {
+                            return const Center(
+                              child: Text('Say Hii! 👋',
+                                  style: TextStyle(fontSize: 20)),
+                            );
+                          }
+                      }
+                    },
                   ),
-                )
-            ],
+                ),
+
+                //progress indicator for showing uploading
+                if (_isUploading)
+                  const Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                          child: CircularProgressIndicator(strokeWidth: 2))),
+
+                //chat input filed
+                _chatInput(),
+
+                //show emojis on keyboard emoji button click & vice versa
+                if (_showEmoji)
+                  SizedBox(
+                    height: mq.height * .35,
+                    child: EmojiPicker(
+                      textEditingController: _textController,
+                      config: const Config(),
+                    ),
+                  )
+              ],
+            ),
           ),
         ),
       ),
@@ -142,77 +144,82 @@ class _ChatScreenState extends State<ChatScreen> {
 
   // app bar widget
   Widget _appBar() {
-    return InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (_) => ViewProfileScreen(user: widget.user)));
-        },
-        child: StreamBuilder(
-            stream: APIs.getUserInfo(widget.user),
-            builder: (context, snapshot) {
-              final data = snapshot.data?.docs;
-              final list =
-                  data?.map((e) => ChatUser.fromJson(e.data())).toList() ?? [];
+    return SafeArea(
+      child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => ViewProfileScreen(user: widget.user)));
+          },
+          child: StreamBuilder(
+              stream: APIs.getUserInfo(widget.user),
+              builder: (context, snapshot) {
+                final data = snapshot.data?.docs;
+                final list =
+                    data?.map((e) => ChatUser.fromJson(e.data())).toList() ??
+                        [];
 
-              return Row(
-                children: [
-                  //back button
-                  IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon:
-                          const Icon(Icons.arrow_back, color: Colors.black54)),
+                return Row(
+                  children: [
+                    //back button
+                    IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.arrow_back,
+                            color: Colors.black54)),
 
-                  //user profile picture
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(mq.height * .03),
-                    child: CachedNetworkImage(
-                      width: mq.height * .05,
-                      height: mq.height * .05,
-                      imageUrl:
-                          list.isNotEmpty ? list[0].image : widget.user.image,
-                      errorWidget: (context, url, error) => const CircleAvatar(
-                          child: Icon(CupertinoIcons.person)),
+                    //user profile picture
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(mq.height * .03),
+                      child: CachedNetworkImage(
+                        width: mq.height * .05,
+                        height: mq.height * .05,
+                        fit: BoxFit.cover,
+                        imageUrl:
+                            list.isNotEmpty ? list[0].image : widget.user.image,
+                        errorWidget: (context, url, error) =>
+                            const CircleAvatar(
+                                child: Icon(CupertinoIcons.person)),
+                      ),
                     ),
-                  ),
 
-                  //for adding some space
-                  const SizedBox(width: 10),
+                    //for adding some space
+                    const SizedBox(width: 10),
 
-                  //user name & last seen time
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //user name
-                      Text(list.isNotEmpty ? list[0].name : widget.user.name,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w500)),
+                    //user name & last seen time
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //user name
+                        Text(list.isNotEmpty ? list[0].name : widget.user.name,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w500)),
 
-                      //for adding some space
-                      const SizedBox(height: 2),
+                        //for adding some space
+                        const SizedBox(height: 2),
 
-                      //last seen time of user
-                      Text(
-                          list.isNotEmpty
-                              ? list[0].isOnline
-                                  ? 'Online'
-                                  : MyDateUtil.getLastActiveTime(
-                                      context: context,
-                                      lastActive: list[0].lastActive)
-                              : MyDateUtil.getLastActiveTime(
-                                  context: context,
-                                  lastActive: widget.user.lastActive),
-                          style: const TextStyle(
-                              fontSize: 13, color: Colors.black54)),
-                    ],
-                  )
-                ],
-              );
-            }));
+                        //last seen time of user
+                        Text(
+                            list.isNotEmpty
+                                ? list[0].isOnline
+                                    ? 'Online'
+                                    : MyDateUtil.getLastActiveTime(
+                                        context: context,
+                                        lastActive: list[0].lastActive)
+                                : MyDateUtil.getLastActiveTime(
+                                    context: context,
+                                    lastActive: widget.user.lastActive),
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.black54)),
+                      ],
+                    )
+                  ],
+                );
+              })),
+    );
   }
 
   // bottom chat input field

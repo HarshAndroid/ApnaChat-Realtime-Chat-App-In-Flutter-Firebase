@@ -30,6 +30,7 @@ class ProfileDialog extends StatelessWidget {
                   borderRadius: BorderRadius.circular(mq.height * .25),
                   child: CachedNetworkImage(
                     width: mq.width * .5,
+                    height: mq.width * .5,
                     fit: BoxFit.cover,
                     imageUrl: user.image,
                     errorWidget: (context, url, error) =>
