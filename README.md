@@ -5,6 +5,9 @@
 
 <b>Simple, Decent & Feature Rich Chatting Application.</b></br>
 
+<b>Final Apk:</b><br>
+https://drive.google.com/file/d/1mfIbPLbeozghsBkMjiXNdwKCcfWTOO3u/view?usp=sharing (Global Apk ~ 23 mb - Supports all devices)
+
 <b>Check Youtube Course 👇<b>
 https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
 
