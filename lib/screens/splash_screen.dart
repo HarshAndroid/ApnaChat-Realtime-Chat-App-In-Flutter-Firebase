@@ -27,23 +27,23 @@ class _SplashScreenState extends State<SplashScreen> {
           systemNavigationBarColor: Colors.white,
           statusBarColor: Colors.white));
 
-      if (APIs.auth.currentUser != null) {
-        log('\nUser: ${APIs.auth.currentUser}');
-        //navigate to home screen
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => const HomeScreen()));
-      } else {
-        //navigate to login screen
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => const LoginScreen()));
-      }
+      log('\nUser: ${APIs.auth.currentUser}');
+
+      //navigate
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => APIs.auth.currentUser != null
+                ? const HomeScreen()
+                : const LoginScreen(),
+          ));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     //initializing media query (for getting device screen size)
-    mq = MediaQuery.of(context).size;
+    mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
       //body
