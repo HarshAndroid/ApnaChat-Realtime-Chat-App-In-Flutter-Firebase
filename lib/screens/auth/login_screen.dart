@@ -86,16 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  //sign out function
-  // _signOut() async {
-  //   await FirebaseAuth.instance.signOut();
-  //   await GoogleSignIn().signOut();
-  // }
-
   @override
   Widget build(BuildContext context) {
     //initializing media query (for getting device screen size)
-    // mq = MediaQuery.of(context).size;
+    mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
       //app bar

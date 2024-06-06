@@ -1,7 +1,7 @@
 name: we_chat
-description: "A new Flutter project."
+description: "A Chatting App Developed by Harsh H. Rajpurohit (Google Me)"
 publish_to: "none"
-version: 0.1.0
+version: 1.0.1+1
 
 environment:
   sdk: ">=3.3.2 <4.0.0"
@@ -11,34 +11,34 @@ dependencies:
     sdk: flutter
 
   # For using cupertino icons
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
 
   # For integrating firebase
-  firebase_core: ^2.29.0
+  firebase_core: ^3.0.0
 
   # For handling firebase authentication
-  firebase_auth: ^4.19.1
+  firebase_auth: ^5.0.0
 
   # For handling google sign in
   google_sign_in: ^6.2.1
 
   # For accessing cloud firestore database
-  cloud_firestore: ^4.16.1
+  cloud_firestore: ^5.0.0
 
   # For showing network images
   cached_network_image: ^3.3.1
 
   # For picking images
-  image_picker: ^1.0.8
+  image_picker: ^1.1.2
 
   # For accessing Firebase Storage (for uploading files)
-  firebase_storage: ^11.7.1
+  firebase_storage: ^12.0.0
 
   # For showing Emojis
   emoji_picker_flutter: ^2.2.0
 
   # For accessing firebase messaging (Push Notification)
-  firebase_messaging: ^14.8.1
+  firebase_messaging: ^15.0.0
 
   # Bearer Token for Push Notification
   googleapis_auth: ^1.6.0
@@ -66,7 +66,7 @@ dev_dependencies:
   #   remove_alpha_ios: true
 
   # For recommended coding practices
-  flutter_lints: ^3.0.2
+  flutter_lints: ^4.0.0
 
 flutter:
   # For enabling material design
