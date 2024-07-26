@@ -14,7 +14,7 @@ https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
 
 <b>Some ScreenShots(Actual App Even Looks Better 😃):</b></br><br>
 <kbd>
-<img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/8.png" width=30% height=30%/>
+<img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/1.png" width=30% height=30%/>
 <img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/2.png" width=30% height=30%/>
 <img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/3.png" width=30% height=30%/>
 <img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/4.png" width=30% height=30%/>
