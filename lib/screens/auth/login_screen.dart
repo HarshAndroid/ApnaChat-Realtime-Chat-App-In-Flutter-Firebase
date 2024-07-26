@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // handles google login button click
   _handleGoogleBtnClick() {
     //for showing progress bar
-    Dialogs.showProgressBar(context);
+    Dialogs.showLoading(context);
 
     _signInWithGoogle().then((user) async {
       //for hiding progress bar
@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
             right: _isAnimate ? mq.width * .25 : -mq.width * .5,
             width: mq.width * .5,
             duration: const Duration(seconds: 1),
-            child: Image.asset('images/icon.png')),
+            child: Image.asset('assets/images/icon.png')),
 
         //google login button
         Positioned(
@@ -124,7 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: _handleGoogleBtnClick,
 
                 //google icon
-                icon: Image.asset('images/google.png', height: mq.height * .03),
+                icon: Image.asset('assets/images/google.png',
+                    height: mq.height * .03),
 
                 //login with google label
                 label: RichText(

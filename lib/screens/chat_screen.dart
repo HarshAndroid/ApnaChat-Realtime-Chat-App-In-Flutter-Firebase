@@ -1,9 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,6 +11,7 @@ import '../main.dart';
 import '../models/chat_user.dart';
 import '../models/message.dart';
 import '../widgets/message_card.dart';
+import '../widgets/profile_image.dart';
 import 'view_profile_screen.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -178,18 +177,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             color: Colors.black54)),
 
                     //user profile picture
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(mq.height * .03),
-                      child: CachedNetworkImage(
-                        width: mq.height * .05,
-                        height: mq.height * .05,
-                        fit: BoxFit.cover,
-                        imageUrl:
-                            list.isNotEmpty ? list[0].image : widget.user.image,
-                        errorWidget: (context, url, error) =>
-                            const CircleAvatar(
-                                child: Icon(CupertinoIcons.person)),
-                      ),
+                    ProfileImage(
+                      size: mq.height * .05,
+                      url: list.isNotEmpty ? list[0].image : widget.user.image,
                     ),
 
                     //for adding some space
@@ -241,8 +231,8 @@ class _ChatScreenState extends State<ChatScreen> {
           //input field & buttons
           Expanded(
             child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
               child: Row(
                 children: [
                   //emoji button

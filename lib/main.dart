@@ -37,14 +37,17 @@ class MyApp extends StatelessWidget {
         title: 'We Chat',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+            useMaterial3: false,
             appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          elevation: 1,
-          iconTheme: IconThemeData(color: Colors.black),
-          titleTextStyle: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.normal, fontSize: 19),
-          backgroundColor: Colors.white,
-        )),
+              centerTitle: true,
+              elevation: 1,
+              iconTheme: IconThemeData(color: Colors.black),
+              titleTextStyle: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 19),
+              backgroundColor: Colors.white,
+            )),
         home: const SplashScreen());
   }
 }

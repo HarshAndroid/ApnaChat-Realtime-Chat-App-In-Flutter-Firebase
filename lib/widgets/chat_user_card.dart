@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../api/apis.dart';
@@ -9,6 +7,7 @@ import '../models/chat_user.dart';
 import '../models/message.dart';
 import '../screens/chat_screen.dart';
 import 'dialogs/profile_dialog.dart';
+import 'profile_image.dart';
 
 //card to represent a single user in home screen
 class ChatUserCard extends StatefulWidget {
@@ -30,8 +29,10 @@ class _ChatUserCardState extends State<ChatUserCard> {
       margin: EdgeInsets.symmetric(horizontal: mq.width * .04, vertical: 4),
       // color: Colors.blue.shade100,
       elevation: 0.5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15))),
       child: InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(15)),
           onTap: () {
             //for navigating to chat screen
             Navigator.push(
@@ -55,17 +56,8 @@ class _ChatUserCardState extends State<ChatUserCard> {
                         context: context,
                         builder: (_) => ProfileDialog(user: widget.user));
                   },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(mq.height * .03),
-                    child: CachedNetworkImage(
-                      width: mq.height * .055,
-                      height: mq.height * .055,
-                      imageUrl: widget.user.image,
-                      fit: BoxFit.cover,
-                      errorWidget: (context, url, error) => const CircleAvatar(
-                          child: Icon(CupertinoIcons.person)),
-                    ),
-                  ),
+                  child: ProfileImage(
+                      size: mq.height * .055, url: widget.user.image),
                 ),
 
                 //user name
@@ -87,12 +79,15 @@ class _ChatUserCardState extends State<ChatUserCard> {
                             _message!.fromId != APIs.user.uid
                         ?
                         //show for unread message
-                        Container(
+                        const SizedBox(
                             width: 15,
                             height: 15,
-                            decoration: BoxDecoration(
-                                color: Colors.greenAccent.shade400,
-                                borderRadius: BorderRadius.circular(10)),
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 0, 230, 119),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                            ),
                           )
                         :
                         //message sent time

@@ -26,9 +26,7 @@ class _MessageCardState extends State<MessageCard> {
   Widget build(BuildContext context) {
     bool isMe = APIs.user.uid == widget.message.fromId;
     return InkWell(
-        onLongPress: () {
-          _showBottomSheet(isMe);
-        },
+        onLongPress: () => _showBottomSheet(isMe),
         child: isMe ? _greenMessage() : _blueMessage());
   }
 
@@ -68,7 +66,7 @@ class _MessageCardState extends State<MessageCard> {
                 :
                 //show image
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
                     child: CachedNetworkImage(
                       imageUrl: widget.message.msg,
                       fit: BoxFit.cover,
@@ -149,7 +147,7 @@ class _MessageCardState extends State<MessageCard> {
                 :
                 //show image
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
                     child: CachedNetworkImage(
                       imageUrl: widget.message.msg,
                       placeholder: (context, url) => const Padding(
@@ -182,8 +180,9 @@ class _MessageCardState extends State<MessageCard> {
                 height: 4,
                 margin: EdgeInsets.symmetric(
                     vertical: mq.height * .015, horizontal: mq.width * .4),
-                decoration: BoxDecoration(
-                    color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+                decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.all(Radius.circular(8))),
               ),
 
               widget.message.type == Type.text
@@ -296,8 +295,8 @@ class _MessageCardState extends State<MessageCard> {
               contentPadding: const EdgeInsets.only(
                   left: 24, right: 24, top: 20, bottom: 10),
 
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
 
               //title
               title: const Row(
@@ -316,9 +315,9 @@ class _MessageCardState extends State<MessageCard> {
                 initialValue: updatedMsg,
                 maxLines: null,
                 onChanged: (value) => updatedMsg = value,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                        borderRadius: BorderRadius.all(Radius.circular(15)))),
               ),
 
               //actions

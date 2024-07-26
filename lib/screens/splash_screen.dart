@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../main.dart';
-import '../api/apis.dart';
+import '../../../main.dart';
+import '../../api/apis.dart';
 import 'auth/login_screen.dart';
 import 'home_screen.dart';
 
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
             top: mq.height * .15,
             right: mq.width * .25,
             width: mq.width * .5,
-            child: Image.asset('images/icon.png')),
+            child: Image.asset('assets/images/icon.png')),
 
         //google login button
         Positioned(

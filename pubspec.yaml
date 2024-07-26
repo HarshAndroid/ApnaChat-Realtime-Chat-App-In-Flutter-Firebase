@@ -52,6 +52,12 @@ dependencies:
   # For storing images into gallery
   gallery_saver_updated: ^3.0.0
 
+  # For Playing Lottie Animation
+  lottie: ^3.1.2
+
+  # Google Gemini Ai Integration
+  google_generative_ai: ^0.4.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -61,7 +67,7 @@ dev_dependencies:
   # flutter_icons:
   #   android: "ic_launcher"
   #   ios: true
-  #   image_path: "images/icon.png"
+  #   image_path: "assets/images/icon.png"
   #   min_sdk_android: 21
   #   remove_alpha_ios: true
 
@@ -74,4 +80,6 @@ flutter:
 
   # App Assets
   assets:
-    - images/
+    - assets/
+    - assets/images/
+    - assets/lottie/
