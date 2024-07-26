@@ -16,9 +16,6 @@ https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view
 <br>
 <br>
 
-<strong>Check Youtube Course 👇</strong>
-https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
-
 <strong>Some Screenshots (Actual App Even Looks Better 😃):</strong></br><br>
 <kbd>
 <img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/1.png" width=30% height=30%/>
@@ -57,6 +54,11 @@ https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
   Google AI Studio: https://aistudio.google.com/app/apikey
   <br>
   <br>
+
+<strong>Check Youtube Course 👇</strong>
+https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
+
+  
   This Project is Much More Improved (i.e. Contains New Features) & Optimized than Youtube Course Project.
   <br><br>I'd love to hear your feedback or suggestions! You can reach me at rajpurohitharsh2020@gmail.com 🙂
 
