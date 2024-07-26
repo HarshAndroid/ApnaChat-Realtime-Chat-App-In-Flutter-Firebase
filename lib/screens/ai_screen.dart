@@ -67,7 +67,7 @@ class _AiScreenState extends State<AiScreen> {
       log('api key: $apiKey');
 
       if (apiKey.isEmpty) {
-        return 'Gemini API Key required\nChange in Ai Screen';
+        return 'Gemini API Key required\nChange in Ai Screen Codes';
       }
 
       final model = GenerativeModel(
