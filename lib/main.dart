@@ -12,18 +12,17 @@ import 'screens/splash_screen.dart';
 //global object for accessing device screen size
 late Size mq;
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   //enter full-screen
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-  await _initializeFirebase();
-
   //for setting orientation to portrait only
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((value) {
+    _initializeFirebase();
     runApp(const MyApp());
   });
 }
@@ -49,7 +48,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Future<void> _initializeFirebase() async {
+_initializeFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   var result = await FlutterNotificationChannel().registerNotificationChannel(
