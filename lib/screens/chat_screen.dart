@@ -69,10 +69,6 @@ class _ChatScreenState extends State<ChatScreen> {
           });
         },
 
-
-    
-
-
         //
         child: Scaffold(
           //app bar
@@ -88,7 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Column(
               children: [
                 Expanded(
-                 okay child: StreamBuilder(
+                  child: StreamBuilder(
                     stream: APIs.getAllMessages(widget.user),
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
