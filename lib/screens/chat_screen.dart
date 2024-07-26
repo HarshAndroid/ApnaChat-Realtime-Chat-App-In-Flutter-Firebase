@@ -52,17 +52,26 @@ class _ChatScreenState extends State<ChatScreen> {
         //if emojis are shown & back button is pressed then hide emojis
         //or else simple close current screen on back button click
         canPop: false,
-      onPopInvoked: (didPop) async {
-        if (didPop) {
-          return;
-        }
-        final navigator = Navigator.of(context);
-        if (_showEmoji) {
-          setState(() => _showEmoji = !_showEmoji);
-        } else {
-          navigator.pop();
-        }
-      },
+
+        onPopInvoked: (_) {
+          if (_showEmoji) {
+            setState(() => _showEmoji = !_showEmoji);
+            return;
+          }
+
+          // some delay before pop
+          Future.delayed(const Duration(milliseconds: 300), () {
+            try {
+              if (Navigator.canPop(context)) Navigator.pop(context);
+            } catch (e) {
+              log('ErrorPop: $e');
+            }
+          });
+        },
+
+
+    
+
 
         //
         child: Scaffold(
@@ -79,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Column(
               children: [
                 Expanded(
-                  child: StreamBuilder(
+                 okay child: StreamBuilder(
                     stream: APIs.getAllMessages(widget.user),
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {

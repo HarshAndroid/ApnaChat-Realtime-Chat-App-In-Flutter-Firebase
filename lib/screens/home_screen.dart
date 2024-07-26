@@ -71,13 +71,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
         //if search is on & back button is pressed then close search
         //or else simple close current screen on back button click
-        canPop: !_isSearching,
-        onPopInvoked: (_) async {
+        canPop: false,
+        onPopInvoked: (_) {
           if (_isSearching) {
             setState(() => _isSearching = !_isSearching);
-          } else {
-            Navigator.of(context).pop();
+            return;
           }
+
+          // some delay before pop
+          Future.delayed(
+              const Duration(milliseconds: 300), SystemNavigator.pop);
         },
 
         //
