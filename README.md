@@ -6,19 +6,20 @@
 <strong>Simple, Decent & Feature Rich Chatting Application.</strong></br>
 
 <br>
-<strong>Arm Apk:</strong><br>
+<strong>Arm Apk:</strong>
 https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view
-<br>(Global Apk ~ 20 mb - Supports arm-v7 and v8 devices)
-
-<strong>Final Apk:</strong><br>
+<br>(Global Apk ~ 20 mb - Supports arm-v7 and v8 devices)<br>
+<br>
+<strong>Final Apk:</strong>
 https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view
-<br>(Global Apk ~ 50 mb - Supports all devices)
+<br>(Global Apk ~ 50 mb - Supports all devices)<br>
+<br>
 <br>
 
-<strong>Check Youtube Course 👇<strong>
+<strong>Check Youtube Course 👇</strong>
 https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
 
-<strong>Some ScreenShots(Actual App Even Looks Better 😃):</strong></br><br>
+<strong>Some Screenshots (Actual App Even Looks Better 😃):</strong></br><br>
 <kbd>
 <img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/1.png" width=30% height=30%/>
 <img src="https://github.com/HarshAndroid/we_chat/blob/master/screenshots/2.png" width=30% height=30%/>
@@ -42,20 +43,20 @@ https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
 <li>Message Read Status
 <li>Message Delete & Edit Feature
 <li>Message Notification (Push Notification)
-<li>AI Chat Bot Integration (Google Gemini)
+<li>AI Chat Bot Integration <strong>(Google Gemini)</strong>
 <li>Decent UI with New Material Widgets
 <li>And Much More....
 </ul>
-  
-<strong>Watch Full Playlist on Youtube:</strong>
-  https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
+
   <br>
   <br>
 
  <strong>Note:</strong> 
   To Use Gemini AI Chatbot Feature, You've to use Your API Key (Which you can create by Visiting Google AI Studio)
+  <br>
   Google AI Studio: https://aistudio.google.com/app/apikey
   <br>
+  <br>
   This Project is Much More Improved (i.e. Contains New Features) & Optimized than Youtube Course Project.
-  For Feedback or Suggestions Mail Me At rajpurohitharsh2020@gmail.com 🙂
+  <br><br>I'd love to hear your feedback or suggestions! You can reach me at rajpurohitharsh2020@gmail.com 🙂
 
