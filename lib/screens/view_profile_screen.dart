@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../helper/my_date_util.dart';
-import '../main.dart';
-import '../models/chat_user.dart';
+import '../../helper/my_date_util.dart';
+import '../../main.dart';
+import '../../models/chat_user.dart';
+import '../widgets/profile_image.dart';
 
 //view profile screen -- to view profile of user
 class ViewProfileScreen extends StatefulWidget {
@@ -56,16 +55,9 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                   SizedBox(width: mq.width, height: mq.height * .03),
 
                   //user profile picture
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(mq.height * .1),
-                    child: CachedNetworkImage(
-                      width: mq.height * .2,
-                      height: mq.height * .2,
-                      fit: BoxFit.cover,
-                      imageUrl: widget.user.image,
-                      errorWidget: (context, url, error) => const CircleAvatar(
-                          child: Icon(CupertinoIcons.person)),
-                    ),
+                  ProfileImage(
+                    size: mq.height * .2,
+                    url: widget.user.image,
                   ),
 
                   // for adding some space

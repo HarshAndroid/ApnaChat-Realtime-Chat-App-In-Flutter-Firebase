@@ -3,12 +3,15 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 
 import '../api/apis.dart';
 import '../helper/dialogs.dart';
 import '../main.dart';
 import '../models/chat_user.dart';
 import '../widgets/chat_user_card.dart';
+import '../widgets/profile_image.dart';
+import 'ai_screen.dart';
 import 'profile_screen.dart';
 
 //home screen -- where all available contacts are shown
@@ -87,7 +90,19 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           //app bar
           appBar: AppBar(
-            leading: const Icon(CupertinoIcons.home),
+            //view profile
+            leading: IconButton(
+              tooltip: 'View Profile',
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => ProfileScreen(user: APIs.me)));
+              },
+              icon: const ProfileImage(size: 32),
+            ),
+
+            //title
             title: _isSearching
                 ? TextField(
                     decoration: const InputDecoration(
@@ -99,39 +114,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       //search logic
                       _searchList.clear();
 
+                      val = val.toLowerCase();
+
                       for (var i in _list) {
-                        if (i.name.toLowerCase().contains(val.toLowerCase()) ||
-                            i.email.toLowerCase().contains(val.toLowerCase())) {
+                        if (i.name.toLowerCase().contains(val) ||
+                            i.email.toLowerCase().contains(val)) {
                           _searchList.add(i);
-                          setState(() {
-                            _searchList;
-                          });
                         }
                       }
+                      setState(() => _searchList);
                     },
                   )
                 : const Text('We Chat'),
             actions: [
               //search user button
               IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isSearching = !_isSearching;
-                    });
-                  },
+                  tooltip: 'Search',
+                  onPressed: () => setState(() => _isSearching = !_isSearching),
                   icon: Icon(_isSearching
                       ? CupertinoIcons.clear_circled_solid
-                      : Icons.search)),
+                      : CupertinoIcons.search)),
 
-              //more features button
+              //add new user
               IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => ProfileScreen(user: APIs.me)));
-                  },
-                  icon: const Icon(Icons.more_vert))
+                  tooltip: 'Add User',
+                  padding: const EdgeInsets.only(right: 8),
+                  onPressed: _addChatUserDialog,
+                  icon: const Icon(CupertinoIcons.person_add, size: 25))
             ],
           ),
 
@@ -139,10 +148,12 @@ class _HomeScreenState extends State<HomeScreen> {
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: FloatingActionButton(
+                backgroundColor: Colors.white,
                 onPressed: () {
-                  _addChatUserDialog();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const AiScreen()));
                 },
-                child: const Icon(Icons.add_comment_rounded)),
+                child: Lottie.asset('assets/lottie/ai.json', width: 40)),
           ),
 
           //body
@@ -222,8 +233,8 @@ class _HomeScreenState extends State<HomeScreen> {
               contentPadding: const EdgeInsets.only(
                   left: 24, right: 24, top: 20, bottom: 10),
 
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15))),
 
               //title
               title: const Row(
@@ -241,11 +252,11 @@ class _HomeScreenState extends State<HomeScreen> {
               content: TextFormField(
                 maxLines: null,
                 onChanged: (value) => email = value,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: 'Email Id',
-                    prefixIcon: const Icon(Icons.email, color: Colors.blue),
+                    prefixIcon: Icon(Icons.email, color: Colors.blue),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                        borderRadius: BorderRadius.all(Radius.circular(15)))),
               ),
 
               //actions
@@ -264,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () async {
                       //hide alert dialog
                       Navigator.pop(context);
-                      if (email.isNotEmpty) {
+                      if (email.trim().isNotEmpty) {
                         await APIs.addChatUser(email).then((value) {
                           if (!value) {
                             Dialogs.showSnackbar(

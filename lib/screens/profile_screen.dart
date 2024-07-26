@@ -1,16 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../api/apis.dart';
-import '../helper/dialogs.dart';
-import '../main.dart';
-import '../models/chat_user.dart';
+import '../../api/apis.dart';
+import '../../helper/dialogs.dart';
+import '../../main.dart';
+import '../../models/chat_user.dart';
+import '../widgets/profile_image.dart';
 import 'auth/login_screen.dart';
 
 //profile screen -- to show signed in user info
@@ -43,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 backgroundColor: Colors.redAccent,
                 onPressed: () async {
                   //for showing progress dialog
-                  Dialogs.showProgressBar(context);
+                  Dialogs.showLoading(context);
 
                   await APIs.updateActiveStatus(false);
 
@@ -90,8 +89,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                             //local image
                             ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(mq.height * .1),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(mq.height * .1)),
                                 child: Image.file(File(_image!),
                                     width: mq.height * .2,
                                     height: mq.height * .2,
@@ -99,18 +98,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             :
 
                             //image from server
-                            ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(mq.height * .1),
-                                child: CachedNetworkImage(
-                                  width: mq.height * .2,
-                                  height: mq.height * .2,
-                                  fit: BoxFit.cover,
-                                  imageUrl: widget.user.image,
-                                  errorWidget: (context, url, error) =>
-                                      const CircleAvatar(
-                                          child: Icon(CupertinoIcons.person)),
-                                ),
+                            ProfileImage(
+                                size: mq.height * .2,
+                                url: widget.user.image,
                               ),
 
                         //edit image button
@@ -148,13 +138,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       validator: (val) => val != null && val.isNotEmpty
                           ? null
                           : 'Required Field',
-                      decoration: InputDecoration(
-                          prefixIcon:
-                              const Icon(Icons.person, color: Colors.blue),
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.person, color: Colors.blue),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          ),
                           hintText: 'eg. Happy Singh',
-                          label: const Text('Name')),
+                          label: Text('Name')),
                     ),
 
                     // for adding some space
@@ -167,13 +157,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       validator: (val) => val != null && val.isNotEmpty
                           ? null
                           : 'Required Field',
-                      decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.info_outline,
-                              color: Colors.blue),
+                      decoration: const InputDecoration(
+                          prefixIcon:
+                              Icon(Icons.info_outline, color: Colors.blue),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          ),
                           hintText: 'eg. Feeling Happy',
-                          label: const Text('About')),
+                          label: Text('About')),
                     ),
 
                     // for adding some space
@@ -254,7 +245,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           if (mounted) Navigator.pop(context);
                         }
                       },
-                      child: Image.asset('images/add_image.png')),
+                      child: Image.asset('assets/images/add_image.png')),
 
                   //take picture from camera button
                   ElevatedButton(
@@ -280,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           if (mounted) Navigator.pop(context);
                         }
                       },
-                      child: Image.asset('images/camera.png')),
+                      child: Image.asset('assets/images/camera.png')),
                 ],
               )
             ],

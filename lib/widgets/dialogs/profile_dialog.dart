@@ -1,10 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
 import '../../models/chat_user.dart';
 import '../../screens/view_profile_screen.dart';
+import '../profile_image.dart';
 
 class ProfileDialog extends StatelessWidget {
   const ProfileDialog({super.key, required this.user});
@@ -16,7 +15,8 @@ class ProfileDialog extends StatelessWidget {
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       backgroundColor: Colors.white.withOpacity(.9),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15))),
       content: SizedBox(
           width: mq.width * .6,
           height: mq.height * .35,
@@ -26,17 +26,7 @@ class ProfileDialog extends StatelessWidget {
               Positioned(
                 top: mq.height * .075,
                 left: mq.width * .1,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(mq.height * .25),
-                  child: CachedNetworkImage(
-                    width: mq.width * .5,
-                    height: mq.width * .5,
-                    fit: BoxFit.cover,
-                    imageUrl: user.image,
-                    errorWidget: (context, url, error) =>
-                        const CircleAvatar(child: Icon(CupertinoIcons.person)),
-                  ),
-                ),
+                child: ProfileImage(size: mq.width * .5, url: user.image),
               ),
 
               //user name
