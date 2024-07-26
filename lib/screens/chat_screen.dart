@@ -51,13 +51,21 @@ class _ChatScreenState extends State<ChatScreen> {
 
         //if emojis are shown & back button is pressed then hide emojis
         //or else simple close current screen on back button click
-        canPop: !_showEmoji,
-        onPopInvoked: (_) async {
+        canPop: false,
+        onPopInvoked: (_) {
           if (_showEmoji) {
             setState(() => _showEmoji = !_showEmoji);
-          } else {
-            Navigator.of(context).pop();
+            return;
           }
+
+          // some delay before pop
+          Future.delayed(const Duration(milliseconds: 300), () {
+            try {
+              if (Navigator.canPop(context)) Navigator.pop(context);
+            } catch (e) {
+              log('ErrorPop: $e');
+            }
+          });
         },
 
         //
