@@ -52,6 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
         //if emojis are shown & back button is pressed then hide emojis
         //or else simple close current screen on back button click
         canPop: false,
+
         onPopInvoked: (_) {
           if (_showEmoji) {
             setState(() => _showEmoji = !_showEmoji);
@@ -68,6 +69,10 @@ class _ChatScreenState extends State<ChatScreen> {
           });
         },
 
+
+    
+
+
         //
         child: Scaffold(
           //app bar
@@ -83,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Column(
               children: [
                 Expanded(
-                  child: StreamBuilder(
+                 okay child: StreamBuilder(
                     stream: APIs.getAllMessages(widget.user),
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
