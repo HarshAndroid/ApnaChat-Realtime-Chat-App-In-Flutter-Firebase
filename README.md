@@ -5,9 +5,15 @@
 
 <strong>Simple, Decent & Feature Rich Chatting Application.</strong></br>
 
+<br>
+<strong>Arm Apk:</strong><br>
+https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view
+<br>(Global Apk ~ 20 mb - Supports arm-v7 and v8 devices)
+
 <strong>Final Apk:</strong><br>
-https://drive.google.com/file/d/1mfIbPLbeozghsBkMjiXNdwKCcfWTOO3u/view?usp=sharing
-<br>(Global Apk ~ 23 mb - Supports all devices)
+https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view
+<br>(Global Apk ~ 50 mb - Supports all devices)
+<br>
 
 <strong>Check Youtube Course 👇<strong>
 https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
@@ -46,6 +52,10 @@ https://youtube.com/playlist?list=PL8kbUJtS6hyal7Uw7wTeYmv7yiNPH5kOq
   <br>
   <br>
 
- <strong>Note:</strong> This Project is Much More Improved (i.e. Contains New Features) & Optimized than Youtube Course Project.
-For Feedback or Suggestions Mail Me At rajpurohitharsh2020@gmail.com 🙂
+ <strong>Note:</strong> 
+  To Use Gemini AI Chatbot Feature, You've to use Your API Key (Which you can create by Visiting Google AI Studio)
+  Google AI Studio: https://aistudio.google.com/app/apikey
+  <br>
+  This Project is Much More Improved (i.e. Contains New Features) & Optimized than Youtube Course Project.
+  For Feedback or Suggestions Mail Me At rajpurohitharsh2020@gmail.com 🙂
 
