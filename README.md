@@ -8,7 +8,7 @@
 <br>
 <strong>Arm Apk:</strong>
 https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view
-<br>(Global Apk ~ 20 mb - Supports arm-v7 and v8 devices)<br>
+<br>(Arm Apk ~ 20 mb - Supports arm-v7 and v8 devices)<br>
 <br>
 <strong>Final Apk:</strong>
 https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view
