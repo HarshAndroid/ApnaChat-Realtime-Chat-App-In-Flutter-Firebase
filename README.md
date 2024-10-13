@@ -73,3 +73,20 @@ Check out the **YouTube Course** here:
 
 I’d love to hear your feedback or suggestions! Feel free to reach out via email:  
 📧 [rajpurohitharsh2020@gmail.com](mailto:rajpurohitharsh2020@gmail.com)
+
+---
+
+## 🏷️ Keywords
+
+- **Flutter Chat App**
+- **Dart Chat Application**
+- **Firebase Real-Time Messaging**
+- **Google Sign-In Chat App**
+- **AI Chatbot in Flutter**
+- **Cross-Platform Chat App**
+- **Flutter Firebase Integration**
+- **Flutter Messaging App**
+- **Material Design in Flutter**
+- **Google Gemini AI Chat**
+
+---
