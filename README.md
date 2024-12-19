@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# we_chat
-
-A new Flutter project.
-=======
 # Apna Chat (We Chat)
 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
@@ -95,4 +90,3 @@ I’d love to hear your feedback or suggestions! Feel free to reach out via emai
 - **Google Gemini AI Chat**
 
 ---
->>>>>>> 806dca544752c5c978f39977aeb4005785d5f0ee
