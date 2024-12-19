@@ -13,7 +13,11 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
+<<<<<<< HEAD
 	<string>Apna Chat</string>
+=======
+	<string>we_chat</string>
+>>>>>>> 806dca544752c5c978f39977aeb4005785d5f0ee
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

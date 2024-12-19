@@ -31,8 +31,35 @@
 
   <title>we_chat</title>
   <link rel="manifest" href="manifest.json">
+<<<<<<< HEAD
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+=======
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = null;
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
+</head>
+<body>
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
+>>>>>>> 806dca544752c5c978f39977aeb4005785d5f0ee
 </body>
 </html>

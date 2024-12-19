@@ -3,7 +3,11 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+<<<<<<< HEAD
 import 'package:gallery_saver_plus/gallery_saver.dart';
+=======
+import 'package:gallery_saver_updated/gallery_saver.dart';
+>>>>>>> 806dca544752c5c978f39977aeb4005785d5f0ee
 
 import '../api/apis.dart';
 import '../helper/dialogs.dart';

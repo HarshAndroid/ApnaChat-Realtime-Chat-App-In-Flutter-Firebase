@@ -62,7 +62,11 @@ class _AiScreenState extends State<AiScreen> {
     try {
       //TODO - Google Gemini API Key - https://aistudio.google.com/app/apikey
 
+<<<<<<< HEAD
       const apiKey = 'AIzaSyA50BOaZoMsbY1jSdX5QR0srYjHJrXlWiU';
+=======
+      const apiKey = '';
+>>>>>>> 806dca544752c5c978f39977aeb4005785d5f0ee
 
       log('api key: $apiKey');
 
