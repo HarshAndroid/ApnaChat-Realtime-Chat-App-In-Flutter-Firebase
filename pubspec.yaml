@@ -1,0 +1,86 @@
+name: we_chat
+description: "A Chatting App Developed by Harsh H. Rajpurohit (Google Me)"
+publish_to: "none"
+version: 1.0.2+2
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # For using cupertino icons
+  cupertino_icons: ^1.0.8
+
+  # For integrating firebase
+  firebase_core: ^3.9.0
+
+  # For handling firebase authentication
+  firebase_auth: ^5.3.4
+
+  # For handling google sign in
+  google_sign_in: ^6.2.2
+
+  # For accessing cloud firestore database
+  cloud_firestore: ^5.6.0
+
+  # For showing network images
+  cached_network_image: ^3.4.1
+
+  # For picking images
+  image_picker: ^1.1.2
+
+  # For accessing Firebase Storage (for uploading files)
+  firebase_storage: ^12.3.7
+
+  # For showing Emojis
+  emoji_picker_flutter: ^3.1.0
+
+  # For accessing firebase messaging (Push Notification)
+  firebase_messaging: ^15.1.6
+
+  # Bearer Token for Push Notification
+  googleapis_auth: ^1.6.0
+
+  # For calling RestAPIs
+  http: ^1.2.2
+
+  # For creating notification channel
+  flutter_notification_channel: ^3.1.0
+
+  # For storing images into gallery
+  # gallery_saver_updated: ^3.0.0
+  gallery_saver_plus: ^3.2.1
+
+  # For Playing Lottie Animation
+  lottie: ^3.2.0
+
+  # Google Gemini Ai Integration
+  google_generative_ai: ^0.4.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  #   flutter_launcher_icons: "^0.10.0"
+
+  # flutter_icons:
+  #   android: "ic_launcher"
+  #   ios: true
+  #   image_path: "assets/images/icon.png"
+  #   min_sdk_android: 21
+  #   remove_alpha_ios: true
+
+  # For recommended coding practices
+  flutter_lints: ^5.0.0
+
+flutter:
+  # For enabling material design
+  uses-material-design: true
+
+  # App Assets
+  assets:
+    - assets/
+    - assets/images/
+    - assets/lottie/
