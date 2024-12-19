@@ -52,11 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
         //or else simple close current screen on back button click
         canPop: false,
 
-<<<<<<< HEAD
         onPopInvokedWithResult: (_, __) {
-=======
-        onPopInvoked: (_) {
->>>>>>> 806dca544752c5c978f39977aeb4005785d5f0ee
           if (_showEmoji) {
             setState(() => _showEmoji = !_showEmoji);
             return;
