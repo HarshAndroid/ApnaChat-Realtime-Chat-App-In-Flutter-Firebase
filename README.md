@@ -11,11 +11,11 @@
 ## 📦 APKs:
 
 - **Arm APK:**  
-  [Download Arm APK](https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view) (~20 MB)  
+  [Download Arm APK](https://drive.google.com/file/d/1LGytBaUy4mjAXMAzIL36UDYMq5-RtqZL/view?usp=sharing) (~21 MB)  
   *(Supports ARM v7 and v8 devices)*
 
 - **Global APK:**  
-  [Download Global APK](https://drive.google.com/file/d/1knjEKijU0mtc7bfM68DDmYeSYE7CEoE9/view) (~50 MB)  
+  [Download Global APK](https://drive.google.com/file/d/1fAEIvP8CVsSvoOOovkLRv8zF8CxnpNmn/view?usp=sharing) (~53 MB)  
   *(Supports all devices)*
 
 ---
