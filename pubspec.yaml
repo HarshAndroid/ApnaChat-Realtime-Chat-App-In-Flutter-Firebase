@@ -59,6 +59,9 @@ dependencies:
   # Google Gemini Ai Integration
   google_generative_ai: ^0.4.3
 
+  # Date Time Formatting
+  intl: ^0.20.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
