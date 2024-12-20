@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gallery_saver_updated/gallery_saver.dart';
+import 'package:gallery_saver_plus/gallery_saver.dart';
 
 import '../api/apis.dart';
 import '../helper/dialogs.dart';
@@ -192,14 +192,16 @@ class _MessageCardState extends State<MessageCard> {
                       icon: const Icon(Icons.copy_all_rounded,
                           color: Colors.blue, size: 26),
                       name: 'Copy Text',
-                      onTap: () async {
+                      onTap: (ctx) async {
                         await Clipboard.setData(
                                 ClipboardData(text: widget.message.msg))
                             .then((value) {
-                          //for hiding bottom sheet
-                          Navigator.pop(context);
+                          if (ctx.mounted) {
+                            //for hiding bottom sheet
+                            Navigator.pop(ctx);
 
-                          Dialogs.showSnackbar(context, 'Text Copied!');
+                            Dialogs.showSnackbar(ctx, 'Text Copied!');
+                          }
                         });
                       })
                   :
@@ -208,17 +210,19 @@ class _MessageCardState extends State<MessageCard> {
                       icon: const Icon(Icons.download_rounded,
                           color: Colors.blue, size: 26),
                       name: 'Save Image',
-                      onTap: () async {
+                      onTap: (ctx) async {
                         try {
                           log('Image Url: ${widget.message.msg}');
                           await GallerySaver.saveImage(widget.message.msg,
                                   albumName: 'We Chat')
                               .then((success) {
-                            //for hiding bottom sheet
-                            Navigator.pop(context);
-                            if (success != null && success) {
-                              Dialogs.showSnackbar(
-                                  context, 'Image Successfully Saved!');
+                            if (ctx.mounted) {
+                              //for hiding bottom sheet
+                              Navigator.pop(ctx);
+                              if (success != null && success) {
+                                Dialogs.showSnackbar(
+                                    ctx, 'Image Successfully Saved!');
+                              }
                             }
                           });
                         } catch (e) {
@@ -239,11 +243,13 @@ class _MessageCardState extends State<MessageCard> {
                 _OptionItem(
                     icon: const Icon(Icons.edit, color: Colors.blue, size: 26),
                     name: 'Edit Message',
-                    onTap: () {
-                      //for hiding bottom sheet
-                      Navigator.pop(context);
+                    onTap: (ctx) {
+                      if (ctx.mounted) {
+                        _showMessageUpdateDialog(ctx);
 
-                      _showMessageUpdateDialog();
+                        //for hiding bottom sheet
+                        // Navigator.pop(ctx);
+                      }
                     }),
 
               //delete option
@@ -252,10 +258,10 @@ class _MessageCardState extends State<MessageCard> {
                     icon: const Icon(Icons.delete_forever,
                         color: Colors.red, size: 26),
                     name: 'Delete Message',
-                    onTap: () async {
+                    onTap: (ctx) async {
                       await APIs.deleteMessage(widget.message).then((value) {
                         //for hiding bottom sheet
-                        Navigator.pop(context);
+                        if (ctx.mounted) Navigator.pop(ctx);
                       });
                     }),
 
@@ -270,27 +276,27 @@ class _MessageCardState extends State<MessageCard> {
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.blue),
                   name:
-                      'Sent At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.sent)}',
-                  onTap: () {}),
+                      'Sent At: ${MyDateUtil.getMessageTime(time: widget.message.sent)}',
+                  onTap: (_) {}),
 
               //read time
               _OptionItem(
                   icon: const Icon(Icons.remove_red_eye, color: Colors.green),
                   name: widget.message.read.isEmpty
                       ? 'Read At: Not seen yet'
-                      : 'Read At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.read)}',
-                  onTap: () {}),
+                      : 'Read At: ${MyDateUtil.getMessageTime(time: widget.message.read)}',
+                  onTap: (_) {}),
             ],
           );
         });
   }
 
   //dialog for updating message content
-  void _showMessageUpdateDialog() {
+  void _showMessageUpdateDialog(final BuildContext ctx) {
     String updatedMsg = widget.message.msg;
 
     showDialog(
-        context: context,
+        context: ctx,
         builder: (_) => AlertDialog(
               contentPadding: const EdgeInsets.only(
                   left: 24, right: 24, top: 20, bottom: 10),
@@ -326,7 +332,7 @@ class _MessageCardState extends State<MessageCard> {
                 MaterialButton(
                     onPressed: () {
                       //hide alert dialog
-                      Navigator.pop(context);
+                      Navigator.pop(ctx);
                     },
                     child: const Text(
                       'Cancel',
@@ -336,9 +342,12 @@ class _MessageCardState extends State<MessageCard> {
                 //update button
                 MaterialButton(
                     onPressed: () {
-                      //hide alert dialog
-                      Navigator.pop(context);
                       APIs.updateMessage(widget.message, updatedMsg);
+                      //hide alert dialog
+                      Navigator.pop(ctx);
+
+                      //for hiding bottom sheet
+                      Navigator.pop(ctx);
                     },
                     child: const Text(
                       'Update',
@@ -353,7 +362,7 @@ class _MessageCardState extends State<MessageCard> {
 class _OptionItem extends StatelessWidget {
   final Icon icon;
   final String name;
-  final VoidCallback onTap;
+  final Function(BuildContext) onTap;
 
   const _OptionItem(
       {required this.icon, required this.name, required this.onTap});
@@ -361,7 +370,7 @@ class _OptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => onTap(),
+        onTap: () => onTap(context),
         child: Padding(
           padding: EdgeInsets.only(
               left: mq.width * .05,
